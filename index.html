@@ -126,11 +126,13 @@
                     <div class="h-8 w-8 bg-emerald-600 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-emerald-600/20">A</div>
                     <span class="font-bold text-xl tracking-tight text-slate-800">ARIP</span>
                 </div>
-                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
-                    <button onclick="scrollToSection('gap')" class="hover:text-emerald-600 transition">The Problem</button>
-                    <button onclick="scrollToSection('engine')" class="hover:text-emerald-600 transition">How It Works</button>
-                    <button onclick="scrollToSection('simulator')" class="hover:text-emerald-600 transition">Risk Simulator</button>
-                    <button onclick="scrollToSection('business')" class="hover:text-emerald-600 transition">Business Model</button>
+                <div class="hidden lg:flex space-x-5 text-sm font-medium text-slate-600">
+                    <button onclick="scrollToSection('market')" class="hover:text-emerald-600 transition">Market</button>
+                    <button onclick="scrollToSection('gap')" class="hover:text-emerald-600 transition">Problem</button>
+                    <button onclick="scrollToSection('engine')" class="hover:text-emerald-600 transition">Engine</button>
+                    <button onclick="scrollToSection('simulator')" class="hover:text-emerald-600 transition">Simulator</button>
+                    <button onclick="scrollToSection('modules')" class="hover:text-emerald-600 transition">Modules</button>
+                    <button onclick="scrollToSection('business')" class="hover:text-emerald-600 transition">Business</button>
                 </div>
                 <button class="bg-slate-900 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow-lg shadow-slate-900/20">Request Demo</button>
             </div>
@@ -148,8 +150,11 @@
                 Turning Agricultural Chaos into <br class="hidden md:block">
                 <span class="gradient-text">Structured Financial Risk</span>
             </h1>
-            <p class="text-xl text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-                ARIP doesn't just predict crop yields. We translate satellite data, weather models, and market trends into <strong>Credit Scores</strong> and <strong>Underwriting Metrics</strong> for Banks & Insurers.
+            <p class="text-xl text-slate-500 mb-6 max-w-2xl mx-auto leading-relaxed">
+                ARIP doesn't just predict crop yields. We act as a <strong>Financial Risk Translation Engine</strong>—ingesting crop forecasts, weather models, satellite intelligence, and market trends—and synthesizing them into <strong>Credit Scores</strong>, <strong>Default Probability (PD)</strong>, <strong>Loss Ratios</strong>, and <strong>Premium Optimization</strong> for financial institutions.
+            </p>
+            <p class="text-sm text-slate-500 mb-10 max-w-2xl mx-auto">
+                <strong>Target Audience:</strong> Insurance companies • NBFCs • Commercial banks • Specialized agricultural lenders
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <button onclick="scrollToSection('simulator')" class="bg-emerald-600 text-white px-8 py-3.5 rounded-xl font-bold hover:bg-emerald-700 transition shadow-xl shadow-emerald-600/30 transform hover:-translate-y-1">
@@ -161,6 +166,35 @@
             </div>
         </div>
     </header>
+
+    <!-- Section: Market Opportunity (India Context) -->
+    <section id="market" class="py-16 bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-slate-900">Industry Context & Market Opportunity</h2>
+                <p class="mt-4 text-slate-500 max-w-2xl mx-auto">
+                    Indian agriculture operates at massive scale but remains inherently volatile—dependent on monsoon patterns and increasingly susceptible to climate change.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100">
+                    <div class="text-2xl mb-3">📊</div>
+                    <h3 class="font-bold text-slate-800 mb-2">Scale of Finance</h3>
+                    <p class="text-sm text-slate-600">Agricultural lending runs into <strong>lakhs of crores annually</strong>, supported by priority sector mandates. State-backed and private crop insurance covers millions of farmers.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100">
+                    <div class="text-2xl mb-3">⚠️</div>
+                    <h3 class="font-bold text-slate-800 mb-2">The NPA Challenge</h3>
+                    <p class="text-sm text-slate-600">Despite high capital deployment, <strong>farm loan NPAs</strong> remain a persistent concern for banks and NBFCs, impacting institutional health.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-emerald-50 border border-emerald-100">
+                    <div class="text-2xl mb-3">🎯</div>
+                    <h3 class="font-bold text-emerald-900 mb-2">The Intelligence Gap</h3>
+                    <p class="text-sm text-emerald-800">Underwriting relies on <strong>coarse, backward-looking district averages</strong>—not granular, forward-looking predictive intelligence. ARIP bridges this gap.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Section 1: The Gap (Problem/Solution Toggle) -->
     <section id="gap" class="py-20 bg-white relative">
@@ -200,21 +234,21 @@
                     <div class="inline-block px-3 py-1 bg-slate-800 rounded-lg text-emerald-400 text-xs font-bold mb-4 border border-slate-700">Technology Core</div>
                     <h2 class="text-3xl font-bold mb-6">The Translation Engine</h2>
                     <p class="text-slate-400 mb-6 leading-relaxed">
-                        We act as the middleware between raw chaos and financial order. ARIP ingests multi-source data and runs it through proprietary financial risk models.
+                        ARIP serves as the connective tissue between ag-tech data providers and financial institutions. We ingest multi-source predictive inputs and mathematically transform them into standardized financial risk metrics—engineered for analysts, underwriters, and credit officers, not agronomists.
                     </p>
                     <div class="space-y-4">
                         <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700">
                             <div class="text-2xl">📡</div>
                             <div>
-                                <h4 class="font-bold text-white text-sm">Multi-Data Fusion</h4>
-                                <p class="text-xs text-slate-400 mt-1">Satellite, Weather, Soil, Market Prices.</p>
+                                <h4 class="font-bold text-white text-sm">Data Ingestion Layer</h4>
+                                <p class="text-xs text-slate-400 mt-1">Crop yield forecasts • Weather & climate anomaly predictions • Satellite (NDVI, soil moisture) • Market prices & MSP trends • Macroeconomic indicators • Soil health data</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700">
                             <div class="text-2xl">⚙️</div>
                             <div>
-                                <h4 class="font-bold text-white text-sm">Financial Logic</h4>
-                                <p class="text-xs text-slate-400 mt-1">Outputs PD, LGD, and Loss Ratios (Not just crop yield).</p>
+                                <h4 class="font-bold text-white text-sm">Financial Outputs</h4>
+                                <p class="text-xs text-slate-400 mt-1">Yield Confidence Score • Climate Disruption Probability • Revenue Forecast Range • Loan Default Probability (PD) • Expected Loss Ratio • Risk Tier (Low/Med/High)</p>
                             </div>
                         </div>
                     </div>
@@ -226,11 +260,13 @@
                         <div class="grid grid-cols-3 gap-4 text-center">
 
                             <!-- Column 1: Inputs -->
-                            <div class="space-y-4 flex flex-col justify-center">
+                            <div class="space-y-3 flex flex-col justify-center">
                                 <span class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Inputs</span>
-                                <div class="bg-slate-700 p-3 rounded border border-slate-600 text-xs">🛰️ Satellite Data</div>
-                                <div class="bg-slate-700 p-3 rounded border border-slate-600 text-xs">⛈️ Weather Models</div>
-                                <div class="bg-slate-700 p-3 rounded border border-slate-600 text-xs">📉 Market Trends</div>
+                                <div class="bg-slate-700 p-2.5 rounded border border-slate-600 text-[10px]">🛰️ Satellite (NDVI, soil)</div>
+                                <div class="bg-slate-700 p-2.5 rounded border border-slate-600 text-[10px]">⛈️ Weather & Climate</div>
+                                <div class="bg-slate-700 p-2.5 rounded border border-slate-600 text-[10px]">📊 Crop Yield Forecasts</div>
+                                <div class="bg-slate-700 p-2.5 rounded border border-slate-600 text-[10px]">📉 Market & MSP Trends</div>
+                                <div class="bg-slate-700 p-2.5 rounded border border-slate-600 text-[10px]">📈 Macro Indicators</div>
                             </div>
 
                             <!-- Column 2: The Engine -->
@@ -244,11 +280,13 @@
                             </div>
 
                             <!-- Column 3: Outputs -->
-                            <div class="space-y-4 flex flex-col justify-center">
+                            <div class="space-y-3 flex flex-col justify-center">
                                 <span class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Outputs</span>
-                                <div class="bg-slate-700 p-3 rounded border border-emerald-500/50 text-xs text-emerald-300 font-bold">💳 Credit Score</div>
-                                <div class="bg-slate-700 p-3 rounded border border-emerald-500/50 text-xs text-emerald-300 font-bold">📊 Loss Ratio</div>
-                                <div class="bg-slate-700 p-3 rounded border border-emerald-500/50 text-xs text-emerald-300 font-bold">🚨 Early Warnings</div>
+                                <div class="bg-slate-700 p-2.5 rounded border border-emerald-500/50 text-[10px] text-emerald-300 font-bold">💳 Credit Score / PD</div>
+                                <div class="bg-slate-700 p-2.5 rounded border border-emerald-500/50 text-[10px] text-emerald-300 font-bold">📊 Loss Ratio</div>
+                                <div class="bg-slate-700 p-2.5 rounded border border-emerald-500/50 text-[10px] text-emerald-300 font-bold">📈 Revenue Forecast</div>
+                                <div class="bg-slate-700 p-2.5 rounded border border-emerald-500/50 text-[10px] text-emerald-300 font-bold">🚨 Early Warnings</div>
+                                <div class="bg-slate-700 p-2.5 rounded border border-emerald-500/50 text-[10px] text-emerald-300 font-bold">🏷️ Risk Tier</div>
                             </div>
                         </div>
                     </div>
@@ -340,37 +378,53 @@
     </section>
 
     <!-- Section 4: Solution Modules -->
-    <section class="py-20 bg-white">
+    <section id="modules" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-10 text-center">
-                <h2 class="text-3xl font-bold text-slate-900">Tailored Modules</h2>
-                <p class="text-slate-500 mt-2">Addressing specific needs for different financial entities.</p>
+                <h2 class="text-3xl font-bold text-slate-900">Product Modules</h2>
+                <p class="text-slate-500 mt-2 max-w-2xl mx-auto">Delivered via API or secure enterprise dashboard. Each module addresses specific institutional needs.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Module A -->
-                <div class="p-8 rounded-2xl border border-slate-100 hover:shadow-lg transition-shadow bg-slate-50 group">
-                    <div class="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">🏦</div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Credit Risk Module</h3>
-                    <p class="text-sm text-slate-500 mb-4 font-semibold uppercase tracking-wide">For Banks & NBFCs</p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Module A: Credit Risk -->
+                <div class="p-6 rounded-2xl border border-slate-100 hover:shadow-lg transition-shadow bg-slate-50 group">
+                    <div class="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">🏦</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Credit Risk Module</h3>
+                    <p class="text-xs text-slate-500 mb-4 font-semibold uppercase tracking-wide">For NBFCs & Banks</p>
                     <ul class="space-y-2 text-sm text-slate-600">
-                        <li class="flex gap-2">✅ Pre-loan risk scoring integration (LOS)</li>
-                        <li class="flex gap-2">✅ Suggested Loan Cap Ranges</li>
-                        <li class="flex gap-2">✅ Early Warning Signals for NPAs</li>
-                        <li class="flex gap-2">✅ District Credit Heatmaps</li>
+                        <li class="flex gap-2">✅ Pre-loan Risk Scoring (LOS integration)</li>
+                        <li class="flex gap-2">✅ Suggested Loan Cap Range</li>
+                        <li class="flex gap-2">✅ Risk-Adjusted Interest Bands</li>
+                        <li class="flex gap-2">✅ Early Warning Signals (mid-season)</li>
+                        <li class="flex gap-2">✅ District-Level Credit Heatmaps</li>
                     </ul>
                 </div>
 
-                <!-- Module B -->
-                <div class="p-8 rounded-2xl border border-slate-100 hover:shadow-lg transition-shadow bg-slate-50 group">
-                    <div class="h-12 w-12 bg-purple-100 rounded-lg flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">🛡️</div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Insurance Underwriting</h3>
-                    <p class="text-sm text-slate-500 mb-4 font-semibold uppercase tracking-wide">For Insurers</p>
+                <!-- Module B: Insurance -->
+                <div class="p-6 rounded-2xl border border-slate-100 hover:shadow-lg transition-shadow bg-slate-50 group">
+                    <div class="h-12 w-12 bg-purple-100 rounded-lg flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">🛡️</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Insurance Underwriting</h3>
+                    <p class="text-xs text-slate-500 mb-4 font-semibold uppercase tracking-wide">For Insurers</p>
                     <ul class="space-y-2 text-sm text-slate-600">
+                        <li class="flex gap-2">✅ Premium Band Recommendations</li>
                         <li class="flex gap-2">✅ Expected Claims Ratio Modeling</li>
-                        <li class="flex gap-2">✅ Premium Band Optimization</li>
+                        <li class="flex gap-2">✅ District & Crop Segmentation</li>
+                        <li class="flex gap-2">✅ Parametric Risk Trigger Alerts</li>
                         <li class="flex gap-2">✅ Fraud Anomaly Detection Flags</li>
-                        <li class="flex gap-2">✅ Parametric Risk Triggers</li>
+                    </ul>
+                </div>
+
+                <!-- Module C: Portfolio Dashboard -->
+                <div class="p-6 rounded-2xl border border-emerald-100 hover:shadow-lg transition-shadow bg-emerald-50/50 group">
+                    <div class="h-12 w-12 bg-emerald-100 rounded-lg flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">📊</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Portfolio Risk Dashboard</h3>
+                    <p class="text-xs text-slate-500 mb-4 font-semibold uppercase tracking-wide">Enterprise Tier</p>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li class="flex gap-2">✅ Geographic Exposure Mapping</li>
+                        <li class="flex gap-2">✅ Crop-Wise Portfolio Analysis</li>
+                        <li class="flex gap-2">✅ Seasonal Risk Trend Analysis</li>
+                        <li class="flex gap-2">✅ Scenario Stress Testing</li>
+                        <li class="flex gap-2">✅ El Niño / Climate Shock Simulation</li>
                     </ul>
                 </div>
             </div>
@@ -417,32 +471,122 @@
             <div class="grid md:grid-cols-3 gap-6 mt-12">
                 <div class="bg-white p-6 rounded-xl border border-slate-200 text-center">
                     <div class="text-emerald-600 font-bold text-lg mb-1">SaaS License</div>
-                    <p class="text-slate-500 text-sm">₹20L - ₹2Cr / Year</p>
-                    <p class="text-xs text-slate-400 mt-2">Per Institution</p>
+                    <p class="text-slate-500 text-sm">₹20L – ₹2Cr / Year</p>
+                    <p class="text-xs text-slate-400 mt-2">Small NBFC: ₹20–40L • Mid: ₹40–75L • Large Banks: ₹1–2Cr</p>
                 </div>
                 <div class="bg-white p-6 rounded-xl border border-slate-200 text-center">
-                    <div class="text-blue-600 font-bold text-lg mb-1">API Fees</div>
-                    <p class="text-slate-500 text-sm">₹50 - ₹150</p>
-                    <p class="text-xs text-slate-400 mt-2">Per Loan Scored</p>
+                    <div class="text-blue-600 font-bold text-lg mb-1">API Usage</div>
+                    <p class="text-slate-500 text-sm">₹50 – ₹150 per loan/policy</p>
+                    <p class="text-xs text-slate-400 mt-2">50K loans @ ₹100 = ₹50L additional revenue</p>
                 </div>
                 <div class="bg-white p-6 rounded-xl border border-slate-200 text-center">
                     <div class="text-purple-600 font-bold text-lg mb-1">Enterprise Tier</div>
-                    <p class="text-slate-500 text-sm">Custom Pricing</p>
-                    <p class="text-xs text-slate-400 mt-2">Advanced Analytics</p>
+                    <p class="text-slate-500 text-sm">Portfolio simulation, loss ratio modeling</p>
+                    <p class="text-xs text-slate-400 mt-2">Custom premium optimization engines</p>
+                </div>
+            </div>
+
+            <!-- Unit Economics & GTM -->
+            <div class="grid md:grid-cols-2 gap-8 mt-12">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200">
+                    <h3 class="font-bold text-slate-800 mb-4">Unit Economics</h3>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li><strong>Early Annual Burn:</strong> ₹1.5 – ₹2.5 Crore</li>
+                        <li><strong>Gross Margin (At Scale):</strong> 60% – 75%</li>
+                        <li><strong>Cost Centers:</strong> Data licensing, cloud compute, AI/ML talent, enterprise sales, regulatory advisory</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200">
+                    <h3 class="font-bold text-slate-800 mb-4">Go-to-Market Strategy</h3>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li><strong>Phase 1:</strong> Single state, one NBFC pilot → validate credit module ROI</li>
+                        <li><strong>Phase 2:</strong> Multiple districts, 2–3 insurers → validate underwriting</li>
+                        <li><strong>Phase 3:</strong> Enterprise contracts, national API integration</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Competitive Advantage -->
+            <div class="mt-16">
+                <h3 class="font-bold text-slate-800 mb-6 text-center">The ARIP Advantage</h3>
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-center">
+                        <div class="text-xl mb-2">🎯</div>
+                        <p class="text-sm font-bold text-emerald-900">Strict Financial Focus</p>
+                        <p class="text-xs text-emerald-700 mt-1">Built for underwriting & credit teams</p>
+                    </div>
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-center">
+                        <div class="text-xl mb-2">🔗</div>
+                        <p class="text-sm font-bold text-emerald-900">Multi-Data Fusion</p>
+                        <p class="text-xs text-emerald-700 mt-1">Agnostic to single data sources</p>
+                    </div>
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-center">
+                        <div class="text-xl mb-2">🔍</div>
+                        <p class="text-sm font-bold text-emerald-900">Explainable AI (XAI)</p>
+                        <p class="text-xs text-emerald-700 mt-1">Regulatory audit-ready models</p>
+                    </div>
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-center">
+                        <div class="text-xl mb-2">⚡</div>
+                        <p class="text-sm font-bold text-emerald-900">API-First</p>
+                        <p class="text-xs text-emerald-700 mt-1">Seamless core system integration</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Regulatory -->
+            <div class="mt-12 p-6 rounded-2xl bg-slate-100 border border-slate-200">
+                <h3 class="font-bold text-slate-800 mb-3">Regulatory & Compliance</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-3 py-1.5 bg-white rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">IRDAI Oversight — Decision-support, audit trails</span>
+                    <span class="px-3 py-1.5 bg-white rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">RBI Oversight — Fair credit scoring, explainable outputs</span>
+                    <span class="px-3 py-1.5 bg-white rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">DPDP Act — Secure storage, encryption</span>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Long-Term Vision -->
+    <section class="py-16 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold mb-4">Long-Term Vision</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto mb-8">
+                    ARIP's goal is to become the <strong class="text-emerald-400">"Financial Risk Infrastructure for Agricultural Portfolios."</strong> Adjacent expansion opportunities:
+                </p>
+            </div>
+            <div class="grid md:grid-cols-4 gap-4">
+                <div class="p-4 rounded-xl bg-slate-800/50 border border-slate-700 text-center">
+                    <p class="text-sm font-semibold text-emerald-400">Climate Risk Analytics</p>
+                    <p class="text-xs text-slate-400 mt-1">Broader financial portfolios</p>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-800/50 border border-slate-700 text-center">
+                    <p class="text-sm font-semibold text-emerald-400">Carbon Credit Scoring</p>
+                    <p class="text-xs text-slate-400 mt-1">Verification intelligence</p>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-800/50 border border-slate-700 text-center">
+                    <p class="text-sm font-semibold text-emerald-400">Commodity Financing</p>
+                    <p class="text-xs text-slate-400 mt-1">Supply chain analytics</p>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-800/50 border border-slate-700 text-center">
+                    <p class="text-sm font-semibold text-emerald-400">International Expansion</p>
+                    <p class="text-xs text-slate-400 mt-1">Southeast Asia, Africa</p>
+                </div>
+            </div>
+            <p class="text-center text-slate-500 text-sm mt-8 italic">
+                ARIP is not an agriculture advisory startup. It is a Financial Risk Intelligence Platform focused on agriculture.
+            </p>
+        </div>
+    </section>
+
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
                 <span class="text-white font-bold text-xl tracking-tight">ARIP</span>
-                <p class="text-sm mt-2">Financial Risk Intelligence Infrastructure for Agriculture.</p>
+                <p class="text-sm mt-2">Financial Risk Intelligence Infrastructure for Agricultural Portfolios.</p>
             </div>
             <div class="text-sm">
-                © 2024 AgriRisk Intelligence Platform. All Rights Reserved.
+                © 2025 AgriRisk Intelligence Platform. All Rights Reserved.
             </div>
             <div class="flex gap-4">
                 <a href="#" class="hover:text-white transition">Privacy</a>
@@ -461,21 +605,24 @@
                     <span class="text-3xl">📉</span>
                     <h3 class="font-bold text-rose-900 text-xl">Insurance Challenges</h3>
                 </div>
-                <ul class="space-y-4 text-rose-800/80">
-                    <li class="flex gap-3"><span class="font-bold">×</span> High & Volatile Loss Ratios</li>
-                    <li class="flex gap-3"><span class="font-bold">×</span> Backward-looking district averages</li>
-                    <li class="flex gap-3"><span class="font-bold">×</span> Vulnerability to Fraud</li>
+                <ul class="space-y-3 text-rose-800/80 text-sm">
+                    <li class="flex gap-3"><span class="font-bold">×</span> High, volatile, unpredictable claims/loss ratios</li>
+                    <li class="flex gap-3"><span class="font-bold">×</span> Limited forward-looking underwriting tools at granular level</li>
+                    <li class="flex gap-3"><span class="font-bold">×</span> High vulnerability to fraudulent claims</li>
+                    <li class="flex gap-3"><span class="font-bold">×</span> Cannot embed real-time climate risk into premium pricing</li>
+                    <li class="flex gap-3"><span class="font-bold">×</span> Over-reliance on historical district-level yield data</li>
                 </ul>
             </div>
             <div class="bg-rose-50 border border-rose-100 p-8 rounded-2xl animate-[fadeIn_0.5s_ease-out] delay-100">
                 <div class="flex items-center gap-3 mb-6">
-                    <span class="text-3xl">🏚️</span>
-                    <h3 class="font-bold text-rose-900 text-xl">Lending Challenges</h3>
+                    <span class="text-3xl">🏦</span>
+                    <h3 class="font-bold text-rose-900 text-xl">NBFC & Bank Challenges</h3>
                 </div>
-                <ul class="space-y-4 text-rose-800/80">
-                    <li class="flex gap-3"><span class="font-bold">×</span> High NPA (Default) Rates</li>
-                    <li class="flex gap-3"><span class="font-bold">×</span> No predictive crop modeling</li>
-                    <li class="flex gap-3"><span class="font-bold">×</span> Static, non-risk-adjusted pricing</li>
+                <ul class="space-y-3 text-rose-800/80 text-sm">
+                    <li class="flex gap-3"><span class="font-bold">×</span> High agricultural loan defaults in exposed geographies</li>
+                    <li class="flex gap-3"><span class="font-bold">×</span> No forward-looking crop performance in loan origination</li>
+                    <li class="flex gap-3"><span class="font-bold">×</span> No real-time district/village-level risk intelligence</li>
+                    <li class="flex gap-3"><span class="font-bold">×</span> Cannot implement dynamic, risk-adjusted credit pricing</li>
                 </ul>
             </div>
         `;
@@ -486,10 +633,11 @@
                     <span class="text-3xl">🛡️</span>
                     <h3 class="font-bold text-emerald-900 text-xl">Insurance Solutions</h3>
                 </div>
-                <ul class="space-y-4 text-emerald-800/80">
-                    <li class="flex gap-3"><span class="font-bold">✓</span> Predictive Loss Ratio Forecasting</li>
-                    <li class="flex gap-3"><span class="font-bold">✓</span> Granular Satellite Intelligence</li>
-                    <li class="flex gap-3"><span class="font-bold">✓</span> Fraud Anomaly Detection</li>
+                <ul class="space-y-3 text-emerald-800/80 text-sm">
+                    <li class="flex gap-3"><span class="font-bold">✓</span> Expected Claims Ratio Modeling & Premium Optimization</li>
+                    <li class="flex gap-3"><span class="font-bold">✓</span> Granular satellite & yield intelligence</li>
+                    <li class="flex gap-3"><span class="font-bold">✓</span> Fraud Anomaly Detection Flags</li>
+                    <li class="flex gap-3"><span class="font-bold">✓</span> Parametric Risk Trigger Alerts</li>
                 </ul>
             </div>
             <div class="bg-emerald-50 border border-emerald-100 p-8 rounded-2xl animate-[fadeIn_0.5s_ease-out] delay-100">
@@ -497,10 +645,11 @@
                     <span class="text-3xl">📈</span>
                     <h3 class="font-bold text-emerald-900 text-xl">Lending Solutions</h3>
                 </div>
-                <ul class="space-y-4 text-emerald-800/80">
-                    <li class="flex gap-3"><span class="font-bold">✓</span> Pre-loan Risk Scoring</li>
-                    <li class="flex gap-3"><span class="font-bold">✓</span> Dynamic Loan Caps</li>
-                    <li class="flex gap-3"><span class="font-bold">✓</span> Early Warning Signals for Stress</li>
+                <ul class="space-y-3 text-emerald-800/80 text-sm">
+                    <li class="flex gap-3"><span class="font-bold">✓</span> Pre-loan Risk Scoring (LOS integration)</li>
+                    <li class="flex gap-3"><span class="font-bold">✓</span> Suggested Loan Cap & Risk-Adjusted Interest Bands</li>
+                    <li class="flex gap-3"><span class="font-bold">✓</span> Early Warning Signals for portfolio stress</li>
+                    <li class="flex gap-3"><span class="font-bold">✓</span> District-Level Credit Heatmaps</li>
                 </ul>
             </div>
         `;
