@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriRisk Intelligence Platform (ARIP) | Interactive Brief</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom Font */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc; /* Slate 50 */
+            color: #1e293b; /* Slate 800 */
+        }
+
+        /* Chart Container Styling - MANDATORY */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #059669 0%, #0e7490 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Simulator Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #059669; /* Emerald 600 */
+            cursor: pointer;
+            box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
+            transition: all 0.2s;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 6px rgba(5, 150, 105, 0.2);
+        }
+
+        /* Engine Node Animations */
+        .engine-node {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .engine-node.active {
+            border-color: #059669;
+            background-color: #ecfdf5;
+            transform: scale(1.02);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tab Transitions */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <!-- Chosen Palette: "Fintech Growth" -> Background: Slate-50 (#f8fafc), Primary: Emerald-600 (#059669) representing Agriculture/Growth, Secondary: Slate-900 (#0f172a) for Trust/Finance. Accent: Cyan-700 (#0e7490) for Technology. -->
+
+    <!-- Application Structure Plan:
+         1. Hero Section: Clear value prop "Data -> Financial Risk".
+         2. The Strategic Gap (Interactive): Toggle comparing "Status Quo" vs "ARIP Solution" to establish the problem space.
+         3. The Translation Engine (Visual Flow): Interactive diagram showing Ingestion -> Processing -> Output. This demystifies the "AI" part.
+         4. Risk Simulator (Core Interaction): A hands-on calculator where users adjust agri-inputs (weather, yield) and see the *Financial Output* (Credit Score, Loan Cap) change in real-time. This proves the "Translation" concept.
+         5. Solution Modules (Tabs): Detailed breakdown of Credit vs Insurance modules.
+         6. Business Viability (Dashboard): Chart.js visualizations for Revenue and Unit Economics to appeal to investors.
+         7. Roadmap & GTM: Simple timeline.
+    -->
+
+    <!-- Visualization & Content Choices:
+         - Gap Analysis: Toggle Switch. Goal: Compare.
+         - Engine: HTML/CSS Grid Flow. Goal: Explain Process.
+         - Simulator: Range Sliders + Dynamic DOM updates. Goal: Engage/Demonstrate Core Algo logic.
+         - Revenue: Bar Chart. Goal: Show Growth Trend.
+         - Unit Economics: Doughnut Chart. Goal: Show Profitability Structure.
+         - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+</head>
+<body class="antialiased selection:bg-emerald-100 selection:text-emerald-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-card bg-white/80 border-b border-slate-200 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <div class="h-8 w-8 bg-emerald-600 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-emerald-600/20">A</div>
+                    <span class="font-bold text-xl tracking-tight text-slate-800">ARIP</span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+                    <button onclick="scrollToSection('gap')" class="hover:text-emerald-600 transition">The Problem</button>
+                    <button onclick="scrollToSection('engine')" class="hover:text-emerald-600 transition">How It Works</button>
+                    <button onclick="scrollToSection('simulator')" class="hover:text-emerald-600 transition">Risk Simulator</button>
+                    <button onclick="scrollToSection('business')" class="hover:text-emerald-600 transition">Business Model</button>
+                </div>
+                <button class="bg-slate-900 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow-lg shadow-slate-900/20">Request Demo</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 px-4 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-50 via-slate-50 to-white -z-10"></div>
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold tracking-wide uppercase mb-6 border border-emerald-200">
+                Financial Risk Intelligence Layer
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
+                Turning Agricultural Chaos into <br class="hidden md:block">
+                <span class="gradient-text">Structured Financial Risk</span>
+            </h1>
+            <p class="text-xl text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed">
+                ARIP doesn't just predict crop yields. We translate satellite data, weather models, and market trends into <strong>Credit Scores</strong> and <strong>Underwriting Metrics</strong> for Banks & Insurers.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="scrollToSection('simulator')" class="bg-emerald-600 text-white px-8 py-3.5 rounded-xl font-bold hover:bg-emerald-700 transition shadow-xl shadow-emerald-600/30 transform hover:-translate-y-1">
+                    Try Risk Simulator
+                </button>
+                <button onclick="scrollToSection('gap')" class="bg-white text-slate-700 border border-slate-200 px-8 py-3.5 rounded-xl font-bold hover:bg-slate-50 transition shadow-sm">
+                    Explore the Problem
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 1: The Gap (Problem/Solution Toggle) -->
+    <section id="gap" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">The Industry Disconnect</h2>
+                <p class="mt-4 text-slate-500 max-w-2xl mx-auto">
+                    Why do institutions struggle with agriculture? Use the toggle below to compare the current broken landscape with the ARIP advantage.
+                </p>
+            </div>
+
+            <!-- Toggle Control -->
+            <div class="flex justify-center mb-10">
+                <div class="bg-slate-100 p-1.5 rounded-xl flex gap-1 shadow-inner">
+                    <button id="btn-pain" onclick="setGapMode('pain')" class="px-8 py-2.5 rounded-lg text-sm font-bold transition-all shadow-sm bg-white text-rose-600 ring-1 ring-black/5">
+                        Current Pain Points
+                    </button>
+                    <button id="btn-gain" onclick="setGapMode('gain')" class="px-8 py-2.5 rounded-lg text-sm font-bold transition-all text-slate-500 hover:text-emerald-600">
+                        The ARIP Solution
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Content Container -->
+            <div id="gap-content" class="grid md:grid-cols-2 gap-8 min-h-[400px]">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: The Translation Engine -->
+    <section id="engine" class="py-20 bg-slate-900 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-5 gap-8 items-center">
+                <!-- Left: Explanation -->
+                <div class="lg:col-span-2">
+                    <div class="inline-block px-3 py-1 bg-slate-800 rounded-lg text-emerald-400 text-xs font-bold mb-4 border border-slate-700">Technology Core</div>
+                    <h2 class="text-3xl font-bold mb-6">The Translation Engine</h2>
+                    <p class="text-slate-400 mb-6 leading-relaxed">
+                        We act as the middleware between raw chaos and financial order. ARIP ingests multi-source data and runs it through proprietary financial risk models.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700">
+                            <div class="text-2xl">📡</div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Multi-Data Fusion</h4>
+                                <p class="text-xs text-slate-400 mt-1">Satellite, Weather, Soil, Market Prices.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700">
+                            <div class="text-2xl">⚙️</div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Financial Logic</h4>
+                                <p class="text-xs text-slate-400 mt-1">Outputs PD, LGD, and Loss Ratios (Not just crop yield).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Visual Flow Diagram -->
+                <div class="lg:col-span-3 relative">
+                    <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 shadow-2xl">
+                        <div class="grid grid-cols-3 gap-4 text-center">
+
+                            <!-- Column 1: Inputs -->
+                            <div class="space-y-4 flex flex-col justify-center">
+                                <span class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Inputs</span>
+                                <div class="bg-slate-700 p-3 rounded border border-slate-600 text-xs">🛰️ Satellite Data</div>
+                                <div class="bg-slate-700 p-3 rounded border border-slate-600 text-xs">⛈️ Weather Models</div>
+                                <div class="bg-slate-700 p-3 rounded border border-slate-600 text-xs">📉 Market Trends</div>
+                            </div>
+
+                            <!-- Column 2: The Engine -->
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="w-full h-1 bg-slate-600 relative top-6 -z-10"></div>
+                                <div class="w-24 h-24 rounded-full bg-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/40 z-10 animate-pulse">
+                                    <span class="text-2xl">🧠</span>
+                                </div>
+                                <span class="mt-4 text-emerald-400 font-bold text-sm">ARIP Core</span>
+                                <span class="text-[10px] text-slate-400">Risk Modeling</span>
+                            </div>
+
+                            <!-- Column 3: Outputs -->
+                            <div class="space-y-4 flex flex-col justify-center">
+                                <span class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Outputs</span>
+                                <div class="bg-slate-700 p-3 rounded border border-emerald-500/50 text-xs text-emerald-300 font-bold">💳 Credit Score</div>
+                                <div class="bg-slate-700 p-3 rounded border border-emerald-500/50 text-xs text-emerald-300 font-bold">📊 Loss Ratio</div>
+                                <div class="bg-slate-700 p-3 rounded border border-emerald-500/50 text-xs text-emerald-300 font-bold">🚨 Early Warnings</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Risk Simulator (Interactive Core) -->
+    <section id="simulator" class="py-24 bg-emerald-50/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">Interactive Risk Lab</h2>
+                <p class="mt-4 text-slate-600 max-w-2xl mx-auto">
+                    <strong>Act as a Credit Officer.</strong> Adjust the farm parameters below to see how ARIP calculates the <em>Credit Score</em> and <em>Loan Eligibility</em> in real-time.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden lg:flex">
+
+                <!-- Left: Controls -->
+                <div class="lg:w-1/2 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-slate-100 bg-slate-50/50">
+                    <h3 class="font-bold text-slate-800 text-lg mb-8 flex items-center gap-2">
+                        <span class="w-2 h-6 bg-emerald-500 rounded-full"></span>
+                        Simulation Parameters
+                    </h3>
+
+                    <!-- Slider 1 -->
+                    <div class="mb-8">
+                        <div class="flex justify-between mb-2">
+                            <label class="text-sm font-semibold text-slate-700">Climate Volatility Index</label>
+                            <span id="val-climate" class="text-sm font-bold text-emerald-600">Low</span>
+                        </div>
+                        <input type="range" id="climate" min="0" max="100" value="20" oninput="updateSimulation()">
+                        <p class="text-xs text-slate-400 mt-2">Likelihood of extreme weather events disrupting harvest.</p>
+                    </div>
+
+                    <!-- Slider 2 -->
+                    <div class="mb-8">
+                        <div class="flex justify-between mb-2">
+                            <label class="text-sm font-semibold text-slate-700">Yield Consistency (Historical)</label>
+                            <span id="val-yield" class="text-sm font-bold text-emerald-600">High</span>
+                        </div>
+                        <input type="range" id="yield" min="0" max="100" value="80" oninput="updateSimulation()">
+                        <p class="text-xs text-slate-400 mt-2">Based on 5-year satellite vegetation index (NDVI) history.</p>
+                    </div>
+
+                    <!-- Slider 3 -->
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-2">
+                            <label class="text-sm font-semibold text-slate-700">Market Price Stability</label>
+                            <span id="val-market" class="text-sm font-bold text-emerald-600">Stable</span>
+                        </div>
+                        <input type="range" id="market" min="0" max="100" value="90" oninput="updateSimulation()">
+                        <p class="text-xs text-slate-400 mt-2">Projected volatility of crop prices at harvest time.</p>
+                    </div>
+                </div>
+
+                <!-- Right: Output Dashboard -->
+                <div class="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center bg-white relative">
+                    <div class="absolute top-6 right-6 px-3 py-1 bg-slate-100 rounded text-xs font-mono text-slate-500">
+                        API RESPONSE PREVIEW
+                    </div>
+
+                    <div class="text-center mb-10">
+                        <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">ARIP Credit Risk Score</p>
+                        <div class="relative inline-block">
+                            <span id="score-display" class="text-7xl font-extrabold text-slate-900 tracking-tighter transition-all">92</span>
+                            <span class="text-2xl text-slate-300 font-light">/100</span>
+                        </div>
+                        <div id="risk-badge" class="mt-4 inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide bg-emerald-100 text-emerald-800">
+                            Low Risk
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 border-t border-slate-100 pt-8">
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Rec. Loan Cap</p>
+                            <p id="loan-cap" class="text-xl font-bold text-slate-800">₹ 2,00,000</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Interest Band</p>
+                            <p id="interest-rate" class="text-xl font-bold text-slate-800">8.5% - 9.5%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Solution Modules -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl font-bold text-slate-900">Tailored Modules</h2>
+                <p class="text-slate-500 mt-2">Addressing specific needs for different financial entities.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Module A -->
+                <div class="p-8 rounded-2xl border border-slate-100 hover:shadow-lg transition-shadow bg-slate-50 group">
+                    <div class="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">🏦</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Credit Risk Module</h3>
+                    <p class="text-sm text-slate-500 mb-4 font-semibold uppercase tracking-wide">For Banks & NBFCs</p>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li class="flex gap-2">✅ Pre-loan risk scoring integration (LOS)</li>
+                        <li class="flex gap-2">✅ Suggested Loan Cap Ranges</li>
+                        <li class="flex gap-2">✅ Early Warning Signals for NPAs</li>
+                        <li class="flex gap-2">✅ District Credit Heatmaps</li>
+                    </ul>
+                </div>
+
+                <!-- Module B -->
+                <div class="p-8 rounded-2xl border border-slate-100 hover:shadow-lg transition-shadow bg-slate-50 group">
+                    <div class="h-12 w-12 bg-purple-100 rounded-lg flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">🛡️</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Insurance Underwriting</h3>
+                    <p class="text-sm text-slate-500 mb-4 font-semibold uppercase tracking-wide">For Insurers</p>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li class="flex gap-2">✅ Expected Claims Ratio Modeling</li>
+                        <li class="flex gap-2">✅ Premium Band Optimization</li>
+                        <li class="flex gap-2">✅ Fraud Anomaly Detection Flags</li>
+                        <li class="flex gap-2">✅ Parametric Risk Triggers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Business Model & Financials -->
+    <section id="business" class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">Business Viability</h2>
+                <p class="mt-4 text-slate-500 max-w-2xl">
+                    Hybrid B2B SaaS + API model ensuring recurring revenue with volume-based upside. Targeting <strong>₹25 Cr ARR by Year 3</strong>.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Revenue Chart -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-slate-800">Revenue Projection (Conservative)</h3>
+                        <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded">₹ Crores</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-4 text-center">Driven by Enterprise adoption & API volume scaling.</p>
+                </div>
+
+                <!-- Unit Economics Chart -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-slate-800">Unit Economics (At Scale)</h3>
+                        <span class="text-xs bg-slate-100 text-slate-800 px-2 py-1 rounded">Gross Margin</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="economicsChart"></canvas>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-4 text-center">Software-driven model allows 60-75% margins.</p>
+                </div>
+            </div>
+
+            <!-- Revenue Stream Cards -->
+            <div class="grid md:grid-cols-3 gap-6 mt-12">
+                <div class="bg-white p-6 rounded-xl border border-slate-200 text-center">
+                    <div class="text-emerald-600 font-bold text-lg mb-1">SaaS License</div>
+                    <p class="text-slate-500 text-sm">₹20L - ₹2Cr / Year</p>
+                    <p class="text-xs text-slate-400 mt-2">Per Institution</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 text-center">
+                    <div class="text-blue-600 font-bold text-lg mb-1">API Fees</div>
+                    <p class="text-slate-500 text-sm">₹50 - ₹150</p>
+                    <p class="text-xs text-slate-400 mt-2">Per Loan Scored</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 text-center">
+                    <div class="text-purple-600 font-bold text-lg mb-1">Enterprise Tier</div>
+                    <p class="text-slate-500 text-sm">Custom Pricing</p>
+                    <p class="text-xs text-slate-400 mt-2">Advanced Analytics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <span class="text-white font-bold text-xl tracking-tight">ARIP</span>
+                <p class="text-sm mt-2">Financial Risk Intelligence Infrastructure for Agriculture.</p>
+            </div>
+            <div class="text-sm">
+                © 2024 AgriRisk Intelligence Platform. All Rights Reserved.
+            </div>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-white transition">Privacy</a>
+                <a href="#" class="hover:text-white transition">Terms</a>
+                <a href="#" class="hover:text-white transition">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. Gap Analysis Logic ---
+        const painContent = `
+            <div class="bg-rose-50 border border-rose-100 p-8 rounded-2xl animate-[fadeIn_0.5s_ease-out]">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="text-3xl">📉</span>
+                    <h3 class="font-bold text-rose-900 text-xl">Insurance Challenges</h3>
+                </div>
+                <ul class="space-y-4 text-rose-800/80">
+                    <li class="flex gap-3"><span class="font-bold">×</span> High & Volatile Loss Ratios</li>
+                    <li class="flex gap-3"><span class="font-bold">×</span> Backward-looking district averages</li>
+                    <li class="flex gap-3"><span class="font-bold">×</span> Vulnerability to Fraud</li>
+                </ul>
+            </div>
+            <div class="bg-rose-50 border border-rose-100 p-8 rounded-2xl animate-[fadeIn_0.5s_ease-out] delay-100">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="text-3xl">🏚️</span>
+                    <h3 class="font-bold text-rose-900 text-xl">Lending Challenges</h3>
+                </div>
+                <ul class="space-y-4 text-rose-800/80">
+                    <li class="flex gap-3"><span class="font-bold">×</span> High NPA (Default) Rates</li>
+                    <li class="flex gap-3"><span class="font-bold">×</span> No predictive crop modeling</li>
+                    <li class="flex gap-3"><span class="font-bold">×</span> Static, non-risk-adjusted pricing</li>
+                </ul>
+            </div>
+        `;
+
+        const gainContent = `
+            <div class="bg-emerald-50 border border-emerald-100 p-8 rounded-2xl animate-[fadeIn_0.5s_ease-out]">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="text-3xl">🛡️</span>
+                    <h3 class="font-bold text-emerald-900 text-xl">Insurance Solutions</h3>
+                </div>
+                <ul class="space-y-4 text-emerald-800/80">
+                    <li class="flex gap-3"><span class="font-bold">✓</span> Predictive Loss Ratio Forecasting</li>
+                    <li class="flex gap-3"><span class="font-bold">✓</span> Granular Satellite Intelligence</li>
+                    <li class="flex gap-3"><span class="font-bold">✓</span> Fraud Anomaly Detection</li>
+                </ul>
+            </div>
+            <div class="bg-emerald-50 border border-emerald-100 p-8 rounded-2xl animate-[fadeIn_0.5s_ease-out] delay-100">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="text-3xl">📈</span>
+                    <h3 class="font-bold text-emerald-900 text-xl">Lending Solutions</h3>
+                </div>
+                <ul class="space-y-4 text-emerald-800/80">
+                    <li class="flex gap-3"><span class="font-bold">✓</span> Pre-loan Risk Scoring</li>
+                    <li class="flex gap-3"><span class="font-bold">✓</span> Dynamic Loan Caps</li>
+                    <li class="flex gap-3"><span class="font-bold">✓</span> Early Warning Signals for Stress</li>
+                </ul>
+            </div>
+        `;
+
+        function setGapMode(mode) {
+            const container = document.getElementById('gap-content');
+            const btnPain = document.getElementById('btn-pain');
+            const btnGain = document.getElementById('btn-gain');
+
+            if (mode === 'pain') {
+                container.innerHTML = painContent;
+                btnPain.className = "px-8 py-2.5 rounded-lg text-sm font-bold transition-all shadow-sm bg-white text-rose-600 ring-1 ring-black/5";
+                btnGain.className = "px-8 py-2.5 rounded-lg text-sm font-bold transition-all text-slate-500 hover:text-emerald-600";
+            } else {
+                container.innerHTML = gainContent;
+                btnGain.className = "px-8 py-2.5 rounded-lg text-sm font-bold transition-all shadow-sm bg-white text-emerald-600 ring-1 ring-black/5";
+                btnPain.className = "px-8 py-2.5 rounded-lg text-sm font-bold transition-all text-slate-500 hover:text-rose-600";
+            }
+        }
+
+        // --- 2. Risk Simulator Logic ---
+        function updateSimulation() {
+            // Inputs (0-100 scale)
+            const climateRisk = parseInt(document.getElementById('climate').value); // Higher = Worse
+            const yieldHist = parseInt(document.getElementById('yield').value); // Higher = Better
+            const marketStab = parseInt(document.getElementById('market').value); // Higher = Better
+
+            // Label Updates
+            document.getElementById('val-climate').innerText = climateRisk < 30 ? "Low" : (climateRisk < 70 ? "Moderate" : "Critical");
+            document.getElementById('val-climate').className = `text-sm font-bold ${climateRisk < 30 ? 'text-emerald-600' : (climateRisk < 70 ? 'text-amber-500' : 'text-rose-600')}`;
+
+            document.getElementById('val-yield').innerText = yieldHist > 70 ? "High" : (yieldHist > 40 ? "Average" : "Low");
+            document.getElementById('val-yield').className = `text-sm font-bold ${yieldHist > 70 ? 'text-emerald-600' : (yieldHist > 40 ? 'text-amber-500' : 'text-rose-600')}`;
+
+            document.getElementById('val-market').innerText = marketStab > 70 ? "Stable" : "Volatile";
+            document.getElementById('val-market').className = `text-sm font-bold ${marketStab > 70 ? 'text-emerald-600' : 'text-rose-600'}`;
+
+            // Algorithm (Simplified Mockup)
+            // Base Score 50.
+            // - Climate impact (up to -30)
+            // + Yield impact (up to +40)
+            // + Market impact (up to +20)
+
+            let score = 30; // Floor base
+            score += (100 - climateRisk) * 0.3;
+            score += yieldHist * 0.4;
+            score += marketStab * 0.2;
+
+            score = Math.round(Math.min(99, Math.max(10, score)));
+
+            // Update UI
+            const scoreDisplay = document.getElementById('score-display');
+            scoreDisplay.innerText = score;
+
+            // Color Logic
+            let colorClass = "text-rose-600";
+            let badgeText = "High Risk";
+            let badgeClass = "bg-rose-100 text-rose-800";
+            let loanCap = "₹ 0 (Reject)";
+            let interest = "N/A";
+
+            if (score > 80) {
+                colorClass = "text-emerald-600";
+                badgeText = "Prime Borrower";
+                badgeClass = "bg-emerald-100 text-emerald-800";
+                loanCap = "₹ 5,00,000";
+                interest = "8.5% - 9.5%";
+            } else if (score > 60) {
+                colorClass = "text-emerald-500";
+                badgeText = "Standard Risk";
+                badgeClass = "bg-emerald-50 text-emerald-700";
+                loanCap = "₹ 2,50,000";
+                interest = "10% - 12%";
+            } else if (score > 40) {
+                colorClass = "text-amber-500";
+                badgeText = "Elevated Risk";
+                badgeClass = "bg-amber-100 text-amber-800";
+                loanCap = "₹ 1,00,000";
+                interest = "14% - 16%";
+            }
+
+            scoreDisplay.className = `text-7xl font-extrabold tracking-tighter transition-all ${colorClass}`;
+
+            const badge = document.getElementById('risk-badge');
+            badge.innerText = badgeText;
+            badge.className = `mt-4 inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide transition-all ${badgeClass}`;
+
+            document.getElementById('loan-cap').innerText = loanCap;
+            document.getElementById('interest-rate').innerText = interest;
+        }
+
+        // --- 3. Chart.js Initialization ---
+        document.addEventListener('DOMContentLoaded', function() {
+            setGapMode('pain'); // Init gap section
+            updateSimulation(); // Init simulator
+
+            // Revenue Chart
+            const ctxRev = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctxRev, {
+                type: 'bar',
+                data: {
+                    labels: ['Year 1', 'Year 2', 'Year 3'],
+                    datasets: [{
+                        label: 'Projected Revenue (₹ Cr)',
+                        data: [0.8, 8, 25], // From source: 60-80L, 4-8Cr, 15-25Cr. Taking optimistic/mid for visual.
+                        backgroundColor: [
+                            'rgba(148, 163, 184, 0.5)', // Slate
+                            'rgba(52, 211, 153, 0.7)', // Light Emerald
+                            '#059669' // Strong Emerald
+                        ],
+                        borderRadius: 6,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1e293b',
+                            padding: 12,
+                            titleFont: { family: 'Plus Jakarta Sans' },
+                            bodyFont: { family: 'Plus Jakarta Sans' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { display: false }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // Economics Chart
+            const ctxEco = document.getElementById('economicsChart').getContext('2d');
+            new Chart(ctxEco, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Gross Margin', 'Data Costs', 'Compute/Cloud', 'Ops/Sales'],
+                    datasets: [{
+                        data: [70, 15, 10, 5], // Approx based on "60-75% Gross Margin"
+                        backgroundColor: [
+                            '#059669', // Margin (Main)
+                            '#334155', // Costs
+                            '#475569',
+                            '#64748b'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20,
+                                font: { family: 'Plus Jakarta Sans', size: 11 }
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+        });
+
+        // Navigation Scroll
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                const yOffset = -80;
+                const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({top: y, behavior: 'smooth'});
+            }
+        }
+    </script>
+</body>
+</html>
